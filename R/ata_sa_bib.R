@@ -1,16 +1,20 @@
 #
 ata_sa_bib <- function(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct, 
-                       control = list("tMin" = 1, "tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, "decr" = (tMin / t)^(1 / (expMax))), 
+                       control = list(), # default: list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, "decr" = NULL)
                        verbose = TRUE){
   
   # INITIALIZATION
   l <- 1
   t <- 1
+  control <- control
+  crtl.default <- list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, "decr" = NULL) 
+  control <- c(control, crtl.default[setdiff(names(crtl.default), names(control))])
+  if(is.null(control$decr)) control$decr <- with(control, (tMin / t)^(1 / (maxGen))) 
   tMin <- control$tMin; L <- control$L; maxGen <- control$maxGen; decr <- control$decr
   
   marginGens <- round(log(maxGen, 10)) + 1
   marginL <- round(log(L, 10)) + 1
-    
+
   # INCUMBENT
   inc  <- array(0, dim = c(ccnt, pcnt, tcnt))
   inc[cbind(1:ccnt, 1, 1:tcnt)] <- 1
@@ -98,7 +102,7 @@ ata_sa_default_bibFitFnct <- function(des){
     sum(abs(colSums(des, dims = 2) - pcnt) / (pcnt * tcnt)),           # each booklet contains exactly 'pcnt' no. clusters
     sum(colSums((colSums(tb)) > 1) / (ccnt * tcnt))                    # each cluster exactly once in a booklet
   )
-  cnstrWgt <- c(6, 4, 6)
+  cnstrWgt <- c(6, 4, 8)
   
   # OBJECTIVES
   zBP <- bp                                                            # departure from optimal pariwise occurrence

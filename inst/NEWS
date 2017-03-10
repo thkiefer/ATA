@@ -1,0 +1,76 @@
+********************************************************
+****       CHANGES IN ATA PACKAGE VERSIONS          ****
+********************************************************
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Automated Test Assembly (ATA)
+Thomas Kiefer & Angela Verschoor 
+
+
+      /\       /\\\ /\\\\\\      /\       
+     /\ \\          /\\         /\ \\     
+    /\  /\\         /\\        /\  /\\    
+   /\\   /\\        /\\       /\\   /\\   
+  /\\\\\\ /\\       /\\      /\\\\\\ /\\  
+ /\\       /\\      /\\     /\\       /\\ 
+/\\         /\\     /\\    /\\         /\\
+
+
+mailto:
+-------
+Thomas Kiefer
+t.kiefer@bifie.at
+
+For reporting a bug, please always provide a reproducible R script 
+and (if necessary) a corresponding dataset.
+
+URL:
+----
+For ATA development versions see
+https://github.com/thkiefer/ATA
+
+For ATA tutorials see
+
+
+-------------------------------------------------------------
+CHANGES IN VERSION 0.00    (2017-03-10)  --  CRAN x.yy-z
+-------------------------------------------------------------
+
+
+FEATURES:
+* ---
+
+BUG FIXSES:
+* ---
+
+NOTES:
+* ---
+
+DATASETS INCLUDED OR MODIFIED:
+* ---
+
+EXAMPLES INCLUDED OR MODIFIED:
+* ---
+
+
+-------------------------------------------------------------
+CHANGES IN VERSION x.yy    (yyyy-mm-dd)  --  CRAN x.yy-z
+-------------------------------------------------------------
+
+
+FEATURES:
+* ---
+
+BUG FIXSES:
+* ---
+
+NOTES:
+* ---
+
+DATASETS INCLUDED OR MODIFIED:
+* ---
+
+EXAMPLES INCLUDED OR MODIFIED:
+* ---

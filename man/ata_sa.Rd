@@ -16,9 +16,7 @@ annealing algorithm.
 
 \usage{
 ata_sa_bib(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct, 
-           control = list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, 
-                          "decr" = (tMin / t)^(1 / (expMax))), 
-           verbose = TRUE)
+  control = list(), verbose = TRUE)
 
 ata_sa_default_bibFitFnct(des)
 ata_sa_generate_bibFitFnct()
