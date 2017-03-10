@@ -6,9 +6,8 @@ ata_sa_bib <- function(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct,
   # INITIALIZATION
   l <- 1
   t <- 1
-  control <- control
-  crtl.default <- list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, "decr" = NULL) 
-  control <- c(control, crtl.default[setdiff(names(crtl.default), names(control))])
+  crtl.default <- list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100) 
+  control <- utils::modifyList(crtl.default, control)
   if(is.null(control$decr)) control$decr <- with(control, (tMin / t)^(1 / (maxGen))) 
   tMin <- control$tMin; L <- control$L; maxGen <- control$maxGen; decr <- control$decr
   

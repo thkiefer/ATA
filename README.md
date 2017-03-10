@@ -27,7 +27,8 @@ design_bib <- ata_sa_bib(30, 15, 4, control = list("maxGen" = 25, "L" = 5e3))
 
 # TODOs
 
-* repare ata_sa_bib
+* add example itembank
+* make ata_sa_izb and run with example itembank (together with ata_sa_bib)
 * think of class structure
 * sa fit evaluation in C++
 * Code-Documentation
@@ -39,4 +40,6 @@ design_bib <- ata_sa_bib(30, 15, 4, control = list("maxGen" = 25, "L" = 5e3))
     + shiny itembank analyzer
     + dynamic fit function constructor
     + design evaluator / log
+* input-check
+    + check coherence of control parameters
 * generalization for multiple possible solvers
