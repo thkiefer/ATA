@@ -1,5 +1,5 @@
 #
-ata_sa_bib <- function(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct, 
+ata_sa_bib <- function(ccnt, pcnt, tcnt, fitFnct = ata_sa_default_bibFitFnct, 
                        control = list(), # default: list("tMin" = 1e-7, "L" = 1e5, "maxGen" = 100, "decr" = NULL)
                        verbose = TRUE){
   
@@ -16,9 +16,8 @@ ata_sa_bib <- function(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct,
 
   # INCUMBENT
   inc  <- array(0, dim = c(ccnt, pcnt, tcnt))
-  inc[cbind(1:ccnt, 1, 1:tcnt)] <- 1
   for(tt in 1:tcnt){
-    inc[cbind(sample(1:ccnt, pcnt-1), 2:pcnt, tt)] <- 1
+    inc[cbind(sample(1:ccnt, pcnt), 1:pcnt, tt)] <- 1
   }
   
   attr(inc, "fit") <- fitFnct(inc)
@@ -48,6 +47,7 @@ ata_sa_bib <- function(tcnt, ccnt, pcnt, fitFnct = ata_sa_default_bibFitFnct,
       attr(child, "fit") <- fitFnct(child)
       
       keep <- attr(child, "fit") < attr(inc, "fit")
+
       if(!keep){
         pt <- exp((attr(inc, "fit") - attr(child, "fit")) / t)
         keep <- runif(1) <= pt
@@ -85,10 +85,9 @@ ata_sa_default_bibFitFnct <- function(des){
   ccnt <- dim(des)[[1]]
   pcnt <- dim(des)[[2]]
   tcnt <- dim(des)[[3]]
-  tb <- aperm(des, c(2, 1, 3))
-  
+
   # CALCULATIONS
-  repPos <- tcnt * pcnt / ccnt
+  repPos <- tcnt / ccnt
   pairCnt <- (repPos * (pcnt - 1)) / (ccnt - 1)
   
   desAllPos <- 1 * (tensor(des, rep(1, pcnt), 2, 1) > 0)
@@ -99,9 +98,9 @@ ata_sa_default_bibFitFnct <- function(des){
   cnstr <- c(
     sum(abs(rowSums(des, dims = 2) - repPos) / (pcnt * tcnt)),         # positional balance
     sum(abs(colSums(des, dims = 2) - pcnt) / (pcnt * tcnt)),           # each booklet contains exactly 'pcnt' no. clusters
-    sum(colSums((colSums(tb)) > 1) / (ccnt * tcnt))                    # each cluster exactly once in a booklet
+    sum((desAllPos > 1) / (ccnt * tcnt))                               # each cluster max once in a booklet
   )
-  cnstrWgt <- c(6, 4, 8)
+  cnstrWgt <- c(6, 4, 6)
   
   # OBJECTIVES
   zBP <- bp                                                            # departure from optimal pariwise occurrence
@@ -110,7 +109,7 @@ ata_sa_default_bibFitFnct <- function(des){
   
   objective <- c(
     sum(zBP) / (2 * length(zBP)), 
-    diff(range(zBP[zBP > 0])) / repPos
+    if(sum(zBP > 0) > 0) diff(range(zBP[zBP > 0])) / repPos else 0
   )
   objWgt <- c(-1, 0)
   
