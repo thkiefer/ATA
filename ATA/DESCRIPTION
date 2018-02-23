@@ -1,15 +1,19 @@
 Package: ATA
 Type: Package
 Title: Automated Test Assembly
-Version: 0.00-5
-Date: 2017-03-10
+Version: 0.00-7
+Date: 2018-02-23
+Authors@R: c(person("Thomas", "Kiefer", role = c("aut", "cre"), email = "t.kiefer@bifie.at"), person("Angela", "Verschoor", role = c("aut")))
 Author: Thomas Kiefer [aut, cre], Angela Verschoor [aut]
 Maintainer: Thomas Kiefer <t.kiefer@bifie.at>
 Description: 
     Tools for automated test assembly in educational assessment. Build
     by Thomas Kiefer and Angela Verschoor.
-Depends: R (>= 3.2.4), 
+Depends: R (>= 3.4.3), 
 Imports: Rcpp, tensor
 LinkingTo: Rcpp, RcppArmadillo
 License: GPL (>= 2)
 NeedsCompilation: yes
+BugReports: https://github.com/thkiefer/ATA/issues
+LazyData: true
+RoxygenNote: 6.0.1
